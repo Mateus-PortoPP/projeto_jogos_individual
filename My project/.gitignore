@@ -1,0 +1,72 @@
+# -----------------------------------------------
+# Pastas geradas automaticamente pelo Unity
+# -----------------------------------------------
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# -----------------------------------------------
+# Builds (geradas localmente, vão para o itch.io)
+# -----------------------------------------------
+[Bb]uild/
+[Bb]uilds/
+ExportedObj/
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# -----------------------------------------------
+# Arquivos de IDE e editor local
+# -----------------------------------------------
+.vscode/
+.idea/
+.consulo/
+*.sln.iml
+
+# -----------------------------------------------
+# Arquivos gerados pelo compilador / Visual Studio
+# -----------------------------------------------
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# -----------------------------------------------
+# Arquivos .meta de debug (nunca de Assets)
+# -----------------------------------------------
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# -----------------------------------------------
+# Crash reports do Unity/Mono
+# -----------------------------------------------
+sysinfo.txt
+*.blob
+
+# -----------------------------------------------
+# Sistema operacional
+# -----------------------------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------------
+# Outros
+# -----------------------------------------------
+crashlytics-build.properties
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/**/[Bb]uildArtifacts/
