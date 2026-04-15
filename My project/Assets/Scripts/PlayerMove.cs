@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
             audioSource.Play();
             
             GameController.Collect();
+            CollectibleSpawner.Instance?.OnCollectibleCollected(other.gameObject);
            
             Destroy(other.gameObject);
         }

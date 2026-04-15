@@ -10,6 +10,18 @@ public static class GameController
 
     public static bool gameOver;
 
+    // Garante que o estado estático seja resetado a cada sessão de Play no Editor.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetStaticState()
+    {
+        initialized = false;
+        gameOver = false;
+        tempoDecorrido = 0f;
+        pontuacao = 0;
+        vidasRestantes = 3;
+        coletaveisRestantes = 0;
+    }
+
     public static void Init()
     {
         coletaveisRestantes = 4;
@@ -40,13 +52,8 @@ public static class GameController
             Init();
         }
 
-        coletaveisRestantes--;
+        coletaveisRestantes = Mathf.Max(0, coletaveisRestantes - 1);
         pontuacao += 100;
-
-        if (coletaveisRestantes <= 0)
-        {
-            gameOver = true;
-        }
     }
 
     public static void PlayerHit()
