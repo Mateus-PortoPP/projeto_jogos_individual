@@ -2,32 +2,46 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Rigidbody2D rb;
-    
+
     public float speed;
+    public float jumpForce = 10f;
     public AudioSource audioSource;
+
+    private bool jumpRequested = false;
+    private int jumpsRemaining = 0;
+
     void Start()
     {
-        rb= GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        
-        
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+        {
+            if (jumpsRemaining > 0)
+                jumpRequested = true;
+        }
+    }
+
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        rb.linearVelocity = new Vector2(moveHorizontal * speed, rb.linearVelocity.y);
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        movement = movement.normalized; // Normaliza o vetor para evitar movimento mais rápido na diagonal
+        if (jumpRequested)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            jumpsRemaining--;
+            jumpRequested = false;
+        }
+    }
 
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-
-        
-       
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        jumpsRemaining = 2;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
