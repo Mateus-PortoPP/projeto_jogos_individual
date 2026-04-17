@@ -14,8 +14,6 @@ public class CollectibleSpawner : MonoBehaviour
     public int maxSpawnAttemptsPerCollectible = 20;
 
     private int currentWaveTarget;
-    private int activeCollectibles;
-    private int collectedThisWave;
     private bool waitingNextWave;
     private float nextWaveTime;
 
@@ -60,15 +58,10 @@ public class CollectibleSpawner : MonoBehaviour
 
     public void OnCollectibleCollected(GameObject collectedObject)
     {
-        collectedThisWave++;
-        activeCollectibles = Mathf.Max(0, activeCollectibles - 1);
+        // Usa contagem real da cena (-1 porque o objeto ainda não foi destruído)
+        int remaining = Mathf.Max(0, CountSceneCollectibles() - 1);
 
-        // Valida com contagem real da cena (o objeto ainda existe, por isso -1)
-        int actualCount = Mathf.Max(0, CountSceneCollectibles() - 1);
-        if (actualCount < activeCollectibles)
-            activeCollectibles = actualCount;
-
-        if (activeCollectibles == 0 && !waitingNextWave)
+        if (remaining == 0)
         {
             waitingNextWave = true;
             nextWaveTime = Time.time + nextWaveDelay;
@@ -94,16 +87,10 @@ public class CollectibleSpawner : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             if (SpawnOneCollectible())
-            {
                 spawned++;
-            }
         }
 
-        activeCollectibles = spawned;
-        collectedThisWave = 0;
-
-        // Se não conseguiu spawnar nada, tenta de novo depois.
-        if (activeCollectibles == 0 && !waitingNextWave)
+        if (spawned == 0 && !waitingNextWave)
         {
             waitingNextWave = true;
             nextWaveTime = Time.time + nextWaveDelay;

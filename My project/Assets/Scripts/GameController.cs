@@ -2,11 +2,15 @@ using UnityEngine;
 
 public static class GameController
 {
+    private const string BestScoreKey = "best_score";
+    private const string BestTimeKey = "best_time";
+
     private static int coletaveisRestantes;
     private static int pontuacao;
     private static int vidasRestantes;
     private static float tempoDecorrido;
     private static bool initialized;
+    private static string lastGameOverReason;
 
     public static bool gameOver;
 
@@ -20,6 +24,7 @@ public static class GameController
         pontuacao = 0;
         vidasRestantes = 3;
         coletaveisRestantes = 0;
+        lastGameOverReason = "";
     }
 
     public static void Init()
@@ -29,6 +34,7 @@ public static class GameController
         vidasRestantes = 3;
         tempoDecorrido = 0f;
         gameOver = false;
+        lastGameOverReason = "";
         initialized = true;
     }
 
@@ -71,8 +77,43 @@ public static class GameController
         vidasRestantes--;
         if (vidasRestantes <= 0)
         {
-            gameOver = true;
+            RegisterGameOver("Voce ficou sem vidas");
         }
+    }
+
+    public static void RegisterGameOver(string reason = "Fim de jogo")
+    {
+        if (!initialized)
+        {
+            Init();
+        }
+
+        if (gameOver)
+        {
+            return;
+        }
+
+        gameOver = true;
+        lastGameOverReason = string.IsNullOrWhiteSpace(reason) ? "Fim de jogo" : reason;
+        SaveBestResults();
+    }
+
+    static void SaveBestResults()
+    {
+        int previousBestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        float previousBestTime = PlayerPrefs.GetFloat(BestTimeKey, 0f);
+
+        if (pontuacao > previousBestScore)
+        {
+            PlayerPrefs.SetInt(BestScoreKey, pontuacao);
+        }
+
+        if (tempoDecorrido > previousBestTime)
+        {
+            PlayerPrefs.SetFloat(BestTimeKey, tempoDecorrido);
+        }
+
+        PlayerPrefs.Save();
     }
 
     public static int GetPontuacao()
@@ -88,6 +129,21 @@ public static class GameController
     public static int GetVidasRestantes()
     {
         return vidasRestantes;
+    }
+
+    public static string GetLastGameOverReason()
+    {
+        return lastGameOverReason;
+    }
+
+    public static int GetBestScore()
+    {
+        return PlayerPrefs.GetInt(BestScoreKey, 0);
+    }
+
+    public static float GetBestTime()
+    {
+        return PlayerPrefs.GetFloat(BestTimeKey, 0f);
     }
 
 }

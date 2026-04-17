@@ -12,6 +12,9 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Ignora especificamente a área de spawn do CollectibleSpawner
+        if (other.GetComponent<CollectibleSpawner>() != null)
+            return;
         HandleHit(other.gameObject);
     }
 
@@ -41,7 +44,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        if (!otherObject.CompareTag("cannon"))
+        if (!otherObject.CompareTag("cannon") && !otherObject.CompareTag("coletavel"))
         {
             alreadyConsumed = true;
             gameObject.SetActive(false);

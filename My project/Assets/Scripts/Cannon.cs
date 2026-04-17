@@ -18,8 +18,6 @@ public class Cannon : MonoBehaviour
 
     void Update()
     {
-        GameController.Tick(Time.deltaTime);
-
         if (player == null) return;
 
         // Perseguir o player no eixo X
