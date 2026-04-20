@@ -1,0 +1,49 @@
+# Ninja Rush
+
+Ninja Rush é um jogo de plataforma 2D em que você controla um ninja e tenta fazer a maior pontuação possível coletando moedas pelo mapa.
+
+Enquanto joga, você precisa se movimentar com cuidado pelas plataformas, aproveitar o pulo duplo e a movimentação nas paredes, e ainda desviar dos tiros de canhão. Algumas plataformas aparecem e desaparecem, então o timing também faz parte do desafio.
+
+## Como jogar
+
+- **A / D** ou **Setas**: mover
+- **W** ou **Espaço**: pular
+- **W** ou **Espaço no ar**: pulo duplo
+- Encostando na parede, o personagem pode se prender nela para se reposicionar
+
+## Objetivo
+
+Coletar o máximo de moedas possível e sobreviver o maior tempo que der, desviando dos obstáculos do mapa.
+
+## Feito com
+
+- **Unity**
+- Exportado em **WebGL** para rodar no navegador
+
+## Links
+
+- **Itch.io:** https://mateus-portopp.itch.io/ninja-rush
+- **GitHub:** https://github.com/Mateus-PortoPP/projeto_jogos_individual
+
+## Créditos
+
+### Áudios
+
+- Efeito sonoro de trombone:  
+  https://cdn.pixabay.com/download/audio/2021/08/04/audio_c003cb2711.mp3?filename=freesound_community-wah-wah-sad-trombone-6347.mp3
+
+- Som de tiro de canhão:  
+  https://cdn.pixabay.com/download/audio/2026/02/20/audio_bdc6365fca.mp3?filename=universfield-powerful-cannon-shot-02-487887.mp3
+
+- Música de fundo:  
+  https://cdn.pixabay.com/download/audio/2024/12/19/audio_e076de63a9.mp3?filename=hitslab-gaming-game-minecraft-background-music-278382.mp3
+
+### Imagens e assets
+
+- Algumas imagens usadas no projeto foram geradas com auxílio do **Gemini**
+- Asset da moeda baixado de:  
+  https://itchio-mirror.cb031a832f44726753d6267436f3b414.r2.cloudflarestorage.com/upload2/game/1557814/5903760?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=3edfcce40115d057d0b5606758e7e9ee%2F20260417%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260417T132018Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=9988b89ee24e35c4f536c07ea55319c7b1d4d2b0b41b62c2bf43afbe1c5298a6
+
+## Autor
+
+Mateus Porto Pereira de Paiva
