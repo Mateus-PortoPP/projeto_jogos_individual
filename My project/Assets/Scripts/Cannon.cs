@@ -14,7 +14,18 @@ public class Cannon : MonoBehaviour
     public float projectileSpeedIncreasePerSecond = 0.25f;
     public float maxProjectileSpeed = 15f;
 
+    public AudioClip shootSound;
+
     private float fireTimer = 0f;
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+    }
 
     void Update()
     {
@@ -47,6 +58,9 @@ public class Cannon : MonoBehaviour
     void Shoot()
     {
         if (projectilePrefab == null || player == null) return;
+
+        if (shootSound != null)
+            audioSource.PlayOneShot(shootSound);
 
         Vector2 direction = (player.position - transform.position).normalized;
         Vector3 spawnPos = transform.position + (Vector3)(direction * 0.6f);

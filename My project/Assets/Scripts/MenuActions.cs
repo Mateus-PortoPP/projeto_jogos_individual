@@ -14,6 +14,7 @@ public class MenuActions : MonoBehaviour
     public float titleFloatSpeed = 1.5f;
     public Image menuBackgroundImage;
     public Sprite menuBackgroundSprite;
+    public TMP_InputField nameInputField;
 
     private Vector2 initialTitlePosition;
 
@@ -46,6 +47,8 @@ public class MenuActions : MonoBehaviour
     public void IniciarJogo()
     {
         Time.timeScale = 1f;
+        if (nameInputField != null)
+            GameController.SetPlayerName(nameInputField.text);
         GameController.Init();
         if (!string.IsNullOrWhiteSpace(gameplaySceneName))
         {

@@ -11,6 +11,7 @@ public static class GameController
     private static float tempoDecorrido;
     private static bool initialized;
     private static string lastGameOverReason;
+    private static string playerName = "Jogador";
 
     public static bool gameOver;
 
@@ -25,7 +26,15 @@ public static class GameController
         vidasRestantes = 3;
         coletaveisRestantes = 0;
         lastGameOverReason = "";
+        playerName = "Jogador";
     }
+
+    public static void SetPlayerName(string name)
+    {
+        playerName = string.IsNullOrWhiteSpace(name) ? "Jogador" : name.Trim();
+    }
+
+    public static string GetPlayerName() => playerName;
 
     public static void Init()
     {
@@ -96,6 +105,7 @@ public static class GameController
         gameOver = true;
         lastGameOverReason = string.IsNullOrWhiteSpace(reason) ? "Fim de jogo" : reason;
         SaveBestResults();
+        RankingManager.AddEntry(playerName, pontuacao);
     }
 
     static void SaveBestResults()

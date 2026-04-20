@@ -107,13 +107,21 @@ public class CollectibleSpawner : MonoBehaviour
         for (int attempt = 0; attempt < maxSpawnAttemptsPerCollectible; attempt++)
         {
             Vector2 position = GetRandomSpawnPosition();
-            Collider2D overlap = Physics2D.OverlapCircle(position, spawnCheckRadius);
 
-            // Só evita spawn em cima de outro coletável; colisões de cenário são esperadas.
-            if (overlap != null && overlap.CompareTag("coletavel"))
+            Collider2D[] hits = Physics2D.OverlapCircleAll(position, spawnCheckRadius);
+            bool blocked = false;
+            foreach (Collider2D hit in hits)
             {
-                continue;
+                // Bloqueia se houver collider sólido (parede, plataforma) ou outro coletável
+                if (!hit.isTrigger || hit.CompareTag("coletavel"))
+                {
+                    blocked = true;
+                    break;
+                }
             }
+
+            if (blocked)
+                continue;
 
             GameObject spawned = Instantiate(collectiblePrefab, position, Quaternion.identity);
             spawned.tag = "coletavel";

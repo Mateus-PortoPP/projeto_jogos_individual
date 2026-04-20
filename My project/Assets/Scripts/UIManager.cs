@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text gameOverActionsHintText;
     public Image gameOverPanelImage;
     public Sprite gameOverPanelSprite;
+    public AudioClip defeatSound;
 
     public int gameplaySceneBuildIndex = 1;
     public int menuSceneBuildIndex = 0;
@@ -23,10 +24,14 @@ public class UIManager : MonoBehaviour
     public KeyCode menuKey = KeyCode.Escape;
 
     private bool gameOverUiShown = false;
+    private AudioSource audioSource;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         Time.timeScale = 1f;
 
         if (gameOverPanelImage != null && gameOverPanelSprite != null)
@@ -112,6 +117,9 @@ public class UIManager : MonoBehaviour
     {
         gameOverUiShown = true;
 
+        if (defeatSound != null)
+            audioSource.PlayOneShot(defeatSound);
+
         if (pauseTimeOnGameOver)
         {
             Time.timeScale = 0f;
@@ -130,7 +138,7 @@ public class UIManager : MonoBehaviour
 
         if (gameOverRecordsText != null)
         {
-            gameOverRecordsText.text = "Recordes\nPontos: " + GameController.GetBestScore() + "\nTempo: " + GameController.GetBestTime().ToString("F1") + "s";
+            gameOverRecordsText.text = "Ranking\n" + RankingManager.FormatRanking();
         }
 
         if (gameOverActionsHintText != null)
